@@ -26,8 +26,8 @@ clean:
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm $(TARGET)
+	rm -f $(TARGET)
 
-re: fclean default
+re: fclean all
 
 .PHONY: all clean fclean re dirs
