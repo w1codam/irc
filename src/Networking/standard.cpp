@@ -5,7 +5,7 @@ int	Networking::Socket()
 	int	fd;
 
 	fd = ::socket(PF_INET, SOCK_STREAM, 0);
-	if (fd < 0)
+	if (fd == -1)
 		throw Networking::NetworkingException("socket() failure");
 	return (fd);
 }
@@ -17,7 +17,7 @@ int	Networking::Accept(int socket, sockaddr_in *address)
 
 	len = sizeof(sockaddr_in);
 	fd = ::accept(socket, (sockaddr*)address, &len);
-	if (fd < 0)
+	if (fd == -1)
 		throw Networking::NetworkingException("accept() failure");
 	return (fd);
 }

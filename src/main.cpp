@@ -13,16 +13,17 @@ int	main(void)
 
 		server = Networking::Socket();
 		Networking::Setnonblocking(server);
-		Networking::Bind(server, 5555);
+		Networking::Setsockopt(server, SO_REUSEPORT, 1);
+		Networking::Bind(server, INADDR_ANY, 6667);
 		Networking::Listen(server, 1);
 
 		client = Networking::Accept(server, &address);
 		Networking::Send(client, "hello\n", 6);
 
-		close(client);
-		close(server);
+		Networking::Close(client);
+		Networking::Close(server);
 	}
-	catch (Networking::NetworkingException &e)
+	catch (const std::exception &e)
 	{
 		std::cout << "error: " << e.what() << std::endl;
 	}
