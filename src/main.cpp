@@ -8,20 +8,7 @@ int	main(void)
 
 	try
 	{
-		int	server, client;
-		sockaddr_in address;
-
-		server = Networking::Socket();
-		Networking::Setnonblocking(server);
-		Networking::Setsockopt(server, SO_REUSEPORT, 1);
-		Networking::Bind(server, INADDR_ANY, 6667);
-		Networking::Listen(server, 1);
-
-		client = Networking::Accept(server, &address);
-		Networking::Send(client, "hello\n", 6);
-
-		Networking::Close(client);
-		Networking::Close(server);
+		Server	server("6667", "passw");
 	}
 	catch (const std::exception &e)
 	{
