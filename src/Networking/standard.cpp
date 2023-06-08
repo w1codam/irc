@@ -39,3 +39,9 @@ void	Networking::Listen(int socket, int backlog)
 	if (::listen(socket, backlog))
 		throw Networking::NetworkingException("listen() failure");
 }
+
+int		Networking::Poll(pollfd fds[], nfds_t nfds, int timeout)
+{
+	if (::poll(fds, nfds, timeout) == -1)
+		throw Networking::NetworkingException("poll() failure");
+}

@@ -68,6 +68,7 @@ void	Bind(int socket, const sockaddr *address);
 void	Setsockopt(int socket, int option_name, int option_value);
 void	Fcntl(int socket, int cmd, int val); 						// NOT USED, fcntl originally has a variable length argument but we only use it for O_NONBLOCK, could also just be SetNonBlocking(...);
 void	Listen(int socket, int backlog);
+int		Poll(pollfd fds[], nfds_t nfds, int timeout);				// timeout is always -1 because we don't have a timeout
 
 }
 

@@ -22,12 +22,19 @@ public:
 	Server(std::string port, std::string password);
 	~Server();
 
+	void		Serve();					// main loop
+
+private:
 	Client*		addClient(int fd);			// makes new client, set fd
 	Client*		getClient(int fd);			// throws if the fd is not found in the map
 	void		removeClient(int fd);		// this function should also remove the client from all channels
 
-	void		addPoll(int fd);
-	void		setPoll(int fd);
+	void		addPoll(int fd, short events);
+	void		setPFlag(pollfd &pfd, short events);		// when outbound messages need to be sent, we set POLL_OUT and remove it after the queue is empty
+	void		removePFlag(pollfd &pfd, short events);		// only problem is; how do we set POLL_OUT from the client/channel classes? maybe give a reference 
+															// to the pollfd struct?
+															// OR WE USE client->hasQueue() to check if they have a queue :>
+															// at the end of the poll loop ^
 
 /*
 to safely remove from poll vector while iterating
@@ -38,6 +45,8 @@ while(it != curFiles.end()) {
         it = curFiles.erase(it);
     else ++it;
 }
+
+or use index based loops
 */
 
 	void		acceptClient();
