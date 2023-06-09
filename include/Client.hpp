@@ -2,7 +2,7 @@
 #define CLIENT_H
 
 #include <string>
-#include <vector>
+#include <queue>
 
 #include "Networking.hpp"
 
@@ -11,7 +11,7 @@ class Client
 private:
 	int							_socket;
 
-	std::vector<std::string>	_queue;
+	std::queue<std::string>		_queue;
 public:
 	Client();
 	~Client();
@@ -37,6 +37,8 @@ public:
 	 * else it returns false
 	 */
 	bool	sendPacket();
+
+	size_t	getQueueSize();
 };
 
 #endif
