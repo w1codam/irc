@@ -16,7 +16,7 @@ $(TARGET): $(OBJS)
 	$(CC) -o $@ $^ $(INC) $(CFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CC) -o $@ $< -c $(INC)
+	$(CC) -o $@ $< -c $(INC) $(CFLAGS)
 
 dirs:
 	mkdir -p obj
