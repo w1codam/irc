@@ -3,7 +3,7 @@
 bool			Client::receivePacket()
 {
 	ssize_t	received;
-	char	buffer[1024];	// pretty sure max length for a single packet is 512 bytes but lets see
+	char	buffer[1024];	// pretty sure max length for a single packet is 512 bytes but lets see (513 to set the null-byte)
 
 	while (this->_buffer.find_first_of("\r\n") != std::string::npos)
 	{
