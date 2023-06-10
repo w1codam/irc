@@ -32,7 +32,7 @@ bool	Server::handleData(Client* client)
 			while (true)
 			{
 				packet = client->getPacket();
-				DEBUG(std::cout << "received packet: " << packet << std::endl;)
+				DEBUG(std::cout << "received packet: " << packet;)
 			}
 		}
 		catch(const std::exception& e) {}
