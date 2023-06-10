@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 
+#include "Debug.hpp"
 #include "Networking.hpp"
 #include "Client.hpp"
 
@@ -47,11 +48,17 @@ while(it != curFiles.end()) {
 }
 
 or use index based loops
+same goes for appending
+
+safely removing is possible with iterators, not with indexes
+safely adding is possible with indexes, not with iterators
+
+great
 */
 
 	void		acceptClient();
-	void		handleDisconnect(int fd);
-	void		handleData(int fd);
+	bool		handleData(Client* client);			// returns false if client should be removed
+	void		handleDisconnect(Client* client);
 };
 
 #endif

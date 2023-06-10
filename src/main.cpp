@@ -2,30 +2,19 @@
 #include "Networking.hpp"
 #include "Server.hpp"
 
-
 int	main(void)
 {
-	std::string kek("");
+	std::cout << "servin'" << std::endl;
 
-	kek += "\x41\x42\x43\x41\x02\x43\x00\x41\x42\x43\x41\x42\x43";
+	try
+	{
+		Server	server("6667", "passw");
+		server.Serve();
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << "error: " << e.what() << std::endl;
+	}
 
-	std::cout << kek.size() << std::endl;
-	std::cout << kek << std::endl;
+	return (EXIT_SUCCESS);
 }
-
-// int	main2(void)
-// {
-// 	std::cout << "servin'" << std::endl;
-
-// 	try
-// 	{
-// 		Server	server("6667", "passw");
-// 		server.Serve();
-// 	}
-// 	catch (const std::exception &e)
-// 	{
-// 		std::cout << "error: " << e.what() << std::endl;
-// 	}
-
-// 	return (EXIT_SUCCESS);
-// }

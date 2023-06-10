@@ -19,3 +19,8 @@ int	 Client::getSocket()
 {
 	return this->_socket;
 }
+
+sockaddr_in&	Client::getAddr()
+{
+	return this->_addr;
+}

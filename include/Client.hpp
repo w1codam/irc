@@ -4,6 +4,7 @@
 #include <string>
 #include <queue>
 
+#include "Debug.hpp"
 #include "Networking.hpp"
 
 class Client
@@ -13,12 +14,14 @@ private:
 
 	std::queue<std::string>		_queue;
 	std::string					_buffer;
+	sockaddr_in					_addr;
 public:
 	Client();
 	~Client();
 
-	void	setSocket(int fd);
-	int		getSocket();
+	void			setSocket(int fd);
+	int				getSocket();
+	sockaddr_in&	getAddr();
 
 	/*
 	 * processQueue() will try to send all outbound packets but
@@ -45,6 +48,9 @@ public:
 	 * receivePacket() receives data from the socket until no more is available
 	 * or until CRLF is found
 	 * when CRLF is present, return true
+	 * IMPORTANT: whenever receivePacket returns true, it means AT LEAST one packet is present in the buffer, could be more
+	 * this is why getPacket should be called in a loop protected by a try/catch block and not just once
+	 * a function processPackets could be implemented in the Server class which does this
 	 */
 	bool			receivePacket();
 	std::string		getPacket();				// get packet until CLRF and keeps the rest in buffer, should only be called if CLRF is present
