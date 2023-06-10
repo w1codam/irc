@@ -9,6 +9,7 @@ void	Server::acceptClient()
 	{
 		client->setSocket(
 			Networking::Accept(this->_socket, &client->getAddr()));
+		Networking::Setnonblocking(client->getSocket());
 	}
 	catch(const std::exception& e)
 	{
@@ -17,6 +18,7 @@ void	Server::acceptClient()
 	}
 	this->_clients[client->getSocket()] = client;
 	this->addPoll(client->getSocket(), POLLIN | POLLHUP);
+	DEBUG(std::cout << "client connected (fd " << client->getSocket() << "): " << std::endl;)
 }
 
 bool	Server::handleData(Client* client)
@@ -32,7 +34,7 @@ bool	Server::handleData(Client* client)
 			while (true)
 			{
 				packet = client->getPacket();
-				DEBUG(std::cout << "received packet: " << packet;)
+				DEBUG(std::cout << "received packet (fd " << client->getSocket() << "): " << packet;)
 			}
 		}
 		catch(const std::exception& e) {}
@@ -48,6 +50,7 @@ bool	Server::handleData(Client* client)
 
 void	Server::handleDisconnect(Client* client)
 {
+	DEBUG(std::cout << "client disconnected (fd " << client->getSocket() << ")" << std::endl;)
 	// remove client from all channels
 
 	delete client;
