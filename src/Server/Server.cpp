@@ -25,6 +25,7 @@ Server::~Server()
 
 void	Server::Serve()
 {
+	DEBUG(std::cout << "serve called" << std::endl;)
 	size_t							nfds;
 	Client*							client;
 	std::vector<pollfd>::iterator	it;
@@ -64,7 +65,7 @@ void	Server::Serve()
 	}
 
 	// remove all pfds with events zeroed out
-	it = this->_pollfds.begin();
+	it = ++this->_pollfds.begin();	// ++ because first fd is server
 	while (it != this->_pollfds.end())
 	{
 		if (!it->events)	it = this->_pollfds.erase(it);
@@ -72,7 +73,7 @@ void	Server::Serve()
 	}
 
 	// set POLLOUT if queue not empty
-	it = this->_pollfds.begin();
+	it = ++this->_pollfds.begin();	// ++ because first fd is server
 	while (it != this->_pollfds.end())
 	{
 		client = this->getClient(it->fd);
@@ -80,6 +81,4 @@ void	Server::Serve()
 			this->setPFlag(*it, POLLOUT);
 		++it;
 	}
-
-	this->Serve();
 }

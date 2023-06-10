@@ -9,7 +9,7 @@ int	main(void)
 	try
 	{
 		Server	server("6667", "passw");
-		server.Serve();
+		while (true) server.Serve();
 	}
 	catch (const std::exception &e)
 	{
