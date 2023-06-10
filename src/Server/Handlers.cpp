@@ -18,26 +18,16 @@ void	Server::acceptClient()
 	}
 	this->_clients[client->getSocket()] = client;
 	this->addPoll(client->getSocket(), POLLIN | POLLHUP);
-	DEBUG(std::cout << "client connected (fd " << client->getSocket() << "): " << std::endl;)
+	DEBUG(std::cout << "client connected (fd " << client->getSocket() << ")" << std::endl;)
 }
 
 bool	Server::handleData(Client* client)
 {
-	std::string	packet;
-
 	try
 	{
 		if (!client->receivePacket())
 			return true;
-		try	// wrap this garbage in a function processPackets()
-		{
-			while (true)
-			{
-				packet = client->getPacket();
-				DEBUG(std::cout << "received packet (fd " << client->getSocket() << "): " << packet;)
-			}
-		}
-		catch(const std::exception& e) {}
+		processPackets(client);
 	}
 	catch(const std::exception& e)
 	{
@@ -46,6 +36,25 @@ bool	Server::handleData(Client* client)
 		return false;
 	}
 	return true;
+}
+
+void	Server::processPackets(Client* client)
+{
+	std::string	packet;
+
+	try	// wrap this garbage in a function processPackets()
+	{
+		while (true)
+		{
+			packet = client->getPacket();
+			DEBUG(std::cout << "received packet (fd " << client->getSocket() << "): " << packet;)
+		}
+		/*
+		while (true) this->packetHandler.invoke(this, client);
+		// the server will have public functions for "getting" clients/channels
+		*/
+	}
+	catch(const std::exception& e) {}
 }
 
 void	Server::handleDisconnect(Client* client)
