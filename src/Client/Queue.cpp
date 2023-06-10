@@ -29,7 +29,7 @@ bool	Client::sendPacket()
 		if ((sent == -1 && errno == EAGAIN) || sent == 0)	// send should not return 0 but it could? https://stackoverflow.com/questions/3081952/with-c-tcp-sockets-can-send-return-zero
 			return false;
 		if (sent == -1)
-			throw Networking::NetworkingException("::Send() failure and errno != EAGAIN");
+			throw Networking::NetworkingException("sendPacket() -> Send() failure and errno != EAGAIN");
 
 		packet.erase(0, sent);
 	}

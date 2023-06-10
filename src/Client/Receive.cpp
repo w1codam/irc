@@ -2,7 +2,25 @@
 
 bool			Client::receivePacket()
 {
+	ssize_t	received;
+	char	buffer[1024];	// pretty sure max length for a single packet is 512 bytes but lets see
 
+	while (this->_buffer.find_first_of("\r\n") != std::string::npos)
+	{
+		received = Networking::Recv(this->_socket, buffer, sizeof(buffer) - 1);
+
+		if (received == -1 && errno == EAGAIN)
+			return false;
+		if (received == -1)
+			throw Networking::NetworkingException("receivePacket() -> Recv() failure and errno != EAGAIN");
+		if (received == 0) // peer disconnect, no idea what we do here, for now throw an exception
+			throw Networking::NetworkingException("receivePacket() peer disconnected");
+
+		buffer[received] = '\0';
+		this->_buffer += buffer;
+	}
+
+	return true;
 }
 
 std::string		Client::getPacket()
