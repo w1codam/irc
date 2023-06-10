@@ -52,6 +52,7 @@ void	Server::processPackets(Client* client)
 		/*
 		while (true) this->packetHandler.invoke(this, client);
 		// the server will have public functions for "getting" clients/channels
+		// remember client->getPacket will throw always
 		*/
 	}
 	catch(const std::exception& e) {}
