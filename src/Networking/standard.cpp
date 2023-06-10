@@ -42,6 +42,10 @@ void	Networking::Listen(int socket, int backlog)
 
 int		Networking::Poll(pollfd fds[], nfds_t nfds, int timeout)
 {
-	if (::poll(fds, nfds, timeout) == -1)
+	int	ret;
+
+	ret = ::poll(fds, nfds, timeout);
+	if (ret == -1)
 		throw Networking::NetworkingException("poll() failure");
+	return ret;
 }

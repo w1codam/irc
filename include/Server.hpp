@@ -32,7 +32,7 @@ private:
 	void		addPoll(int fd, short events);
 	void		setPFlag(pollfd &pfd, short events);		// when outbound messages need to be sent, we set POLL_OUT and remove it after the queue is empty
 	void		removePFlag(pollfd &pfd, short events);		// only problem is; how do we set POLL_OUT from the client/channel classes? maybe give a reference 
-															// to the pollfd struct?
+															// to the pollfd struct? (this is the most efficient but not clean)
 															// OR WE USE client->hasQueue() to check if they have a queue :>
 															// at the end of the poll loop ^
 

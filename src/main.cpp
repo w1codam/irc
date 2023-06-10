@@ -5,15 +5,12 @@
 
 int	main(void)
 {
-	std::queue<std::string>	test;
+	std::string kek("");
 
-	test.push("hello :)");
+	kek += "\x41\x42\x43\x41\x02\x43\x00\x41\x42\x43\x41\x42\x43";
 
-	test.front()[2] = 'X';
-
-	std::string &s = test.front();
-
-	std::cout << s << std::endl;
+	std::cout << kek.size() << std::endl;
+	std::cout << kek << std::endl;
 }
 
 // int	main2(void)
