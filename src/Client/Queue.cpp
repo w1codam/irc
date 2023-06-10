@@ -37,3 +37,8 @@ bool	Client::sendPacket()
 	this->_queue.pop();
 	return true;
 }
+
+void	Client::queuePacket(std::string packet)
+{
+	this->_queue.push(packet);
+}

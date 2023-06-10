@@ -12,6 +12,7 @@ private:
 	int							_socket;
 
 	std::queue<std::string>		_queue;
+	std::string					_buffer;
 public:
 	Client();
 	~Client();
@@ -37,8 +38,16 @@ public:
 	 * else it returns false
 	 */
 	bool	sendPacket();
-
+	void	queuePacket(std::string packet);	// simply append a packet to the queue
 	size_t	getQueueSize();
+
+	/*
+	 * receivePacket() receives data from the socket until no more is available
+	 * or until CRLF is found
+	 * when CRLF is present, return true
+	 */
+	bool			receivePacket();
+	std::string		getPacket();				// get packet until CLRF and keeps the rest in buffer, should only be called if CLRF is present
 };
 
 #endif
