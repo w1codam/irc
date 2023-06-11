@@ -42,19 +42,9 @@ void	Server::processPackets(Client* client)
 {
 	std::string	packet;
 
-	try	// wrap this garbage in a function processPackets()
+	try
 	{
-		while (true)
-		{
-			// packet = client->getPacket();
-			// DEBUG(std::cout << "received packet (fd " << client->getSocket() << "): " << packet;)
-			this->_commandHandler->Invoke(client, client->getPacket());
-		}
-		/*
-		while (true) this->packetHandler.invoke(client, client->getPacket());
-		// the server will have public functions for "getting" clients/channels
-		// remember client->getPacket will throw always
-		*/
+		while (true) this->_commandHandler->Invoke(client, client->getPacket());	// process all packets
 	}
 	catch(const std::exception& e) {}
 }
