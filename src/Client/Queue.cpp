@@ -7,7 +7,7 @@ size_t	Client::getQueueSize()
 
 bool	Client::processQueue()
 {
-	while (this->sendPacket());			// try to process all packets
+	while (this->_queue.size() && this->sendPacket());			// try to process all packets
 	return this->_queue.size() == 0;
 }
 
@@ -40,5 +40,6 @@ bool	Client::sendPacket()
 
 void	Client::queuePacket(std::string packet)
 {
-	this->_queue.push(packet);
+	std::string	complete(packet + "\r\n");
+	this->_queue.push(complete);
 }

@@ -9,9 +9,19 @@
 
 class Client
 {
+private: // irc related variables
+	std::string					_nickname;
+	std::string					_username;
+	std::string					_realname;
+public:
+	std::string					getNickname();
+	std::string					getUsername();
+	std::string					getRealname();
+	void						setNickname(std::string nickname);
+	void						setUsername(std::string username);
+	void						setRealname(std::string realname);
 private:
 	int							_socket;
-
 	std::queue<std::string>		_queue;
 	std::string					_buffer;
 	sockaddr_in					_addr;

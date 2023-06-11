@@ -46,11 +46,12 @@ void	Server::processPackets(Client* client)
 	{
 		while (true)
 		{
-			packet = client->getPacket();
-			DEBUG(std::cout << "received packet (fd " << client->getSocket() << "): " << packet;)
+			// packet = client->getPacket();
+			// DEBUG(std::cout << "received packet (fd " << client->getSocket() << "): " << packet;)
+			this->_commandHandler->Invoke(client, client->getPacket());
 		}
 		/*
-		while (true) this->packetHandler.invoke(this, client);
+		while (true) this->packetHandler.invoke(client, client->getPacket());
 		// the server will have public functions for "getting" clients/channels
 		// remember client->getPacket will throw always
 		*/

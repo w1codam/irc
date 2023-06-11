@@ -2,8 +2,7 @@
 
 Client::Client():
 	_socket(-1)
-{
-}
+{}
 
 Client::~Client()
 {

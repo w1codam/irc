@@ -6,16 +6,19 @@
 #include <map>
 
 #include "Debug.hpp"
+#include "CommandHandler.hpp"
 #include "Networking.hpp"
 #include "Client.hpp"
+
+class CommandHandler;
 
 class Server
 {
 private:
+	int						_socket;
 	const in_port_t			_port;
 	const std::string		_password;
-
-	int						_socket;
+	const CommandHandler*	_commandHandler;
 
 	std::vector<pollfd>		_pollfds;
 	std::map<int, Client*>	_clients;

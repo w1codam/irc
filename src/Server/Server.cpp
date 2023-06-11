@@ -1,9 +1,10 @@
 #include "Server.hpp"
 
 Server::Server(std::string port, std::string password):
+	_socket(-1),
 	_port(std::stoi(port)),
 	_password(password),
-	_socket(-1)
+	_commandHandler(new CommandHandler(*this))
 {
 	// socket server setup
 	this->_socket = Networking::Socket();
@@ -17,6 +18,7 @@ Server::Server(std::string port, std::string password):
 
 Server::~Server()
 {
+	delete _commandHandler;
 	Networking::Close(this->_socket);
 
 	// delete all channels
