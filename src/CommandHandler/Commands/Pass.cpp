@@ -9,6 +9,6 @@ cPass::~cPass()
 
 void	cPass::Execute(Client* client, std::vector<std::string>& arguments)
 {
-	std::string		pass(arguments.at(0));
+	std::string		pass(Command::getArgument(arguments));
 	(void)client;
 }

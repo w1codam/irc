@@ -18,8 +18,11 @@ public:
 	explicit		Command(Server& server, const bool authRequired);
 	virtual			~Command();
 
-	bool			authRequired();
-	virtual void	Execute(Client* client, std::vector<std::string>& arguments) = 0;
+	static std::string	getArgument(std::vector<std::string>& arguments);
+	static std::string	joinArguments(std::vector<std::string>& arguments);
+
+	bool				authRequired();
+	virtual void		Execute(Client* client, std::vector<std::string>& arguments) = 0;
 };
 
 class cNick: public Command

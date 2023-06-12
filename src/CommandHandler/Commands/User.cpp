@@ -9,9 +9,10 @@ cUser::~cUser()
 
 void	cUser::Execute(Client* client, std::vector<std::string>& arguments)
 {
-	std::string		username(arguments.at(0));
-	std::string		mode    (arguments.at(1));
-	std::string		realname(arguments.at(3));
+	std::string		username	(Command::getArgument(arguments));
+	std::string		mode    	(Command::getArgument(arguments));
+	std::string		_			(Command::getArgument(arguments));
+	std::string		realname	(Command::getArgument(arguments));
 
 	if (client->getNickname().empty())
 		return (void)client->queuePacket("NOIMPL: no nick set");

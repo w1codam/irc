@@ -16,8 +16,13 @@ private:
 public:
 	void	sendMessage(std::string message);	// for each member, append this to queue
 
+	bool	isMember(Client* client);
+	bool	isOperator(Client* client);
+
 	void	addUser(Client* client);
 	void	removeUser(Client* client);
+	void	addOperator(Client* client);
+	void	removeOperator(Client* client);
 };
 
 #endif
