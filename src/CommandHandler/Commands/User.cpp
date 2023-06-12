@@ -14,7 +14,7 @@ void	cUser::Execute(Client* client, std::vector<std::string>& arguments)
 	std::string		realname(arguments.at(3));
 
 	if (client->getNickname().empty())
-		return (void)client->queuePacket(ERR_UNKNOWNERROR("USER"));
+		return (void)client->queuePacket("NOIMPL: no nick set");
 
 	client->setUsername(username);
 	client->setRealname(realname);

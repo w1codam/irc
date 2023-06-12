@@ -36,5 +36,6 @@ std::string		Client::getPacket()
 	packet = this->_buffer.substr(0, pos);
 	this->_buffer.erase(0, pos + 2);
 
+	DEBUG(std::cout << "server <- [" << this->getNickname() << "] : " << packet << std::endl;)
 	return packet;
 }

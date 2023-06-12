@@ -14,11 +14,11 @@ void	cNick::Execute(Client* client, std::vector<std::string>& arguments)
 	try
 	{
 		this->_server.getClient(nick);
-		client->queuePacket("nick in use");
+		client->queuePacket("NOIMPL: nick in use");
 	}
 	catch (const std::exception& e)
 	{
 		client->setNickname(nick);
-		client->queuePacket("lmao nice bro!");
+		client->queuePacket("NOIMPL: lmao nice bro!");
 	}
 }

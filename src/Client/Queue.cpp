@@ -40,7 +40,7 @@ bool	Client::sendPacket()
 
 void	Client::queuePacket(std::string packet)
 {
-	DEBUG(std::cout << "server -> [" << this->getNickname() << "] queued : " << packet << std::endl;)
+	DEBUG(std::cout << "server -> [" << this->getNickname() << "] : " << packet << std::endl;)
 	std::string	complete(packet + "\r\n");
 	this->_queue.push(complete);
 }
