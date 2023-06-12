@@ -5,7 +5,7 @@ bool			Client::receivePacket()
 	ssize_t	received;
 	char	buffer[1024];	// pretty sure max length for a single packet is 512 bytes but lets see (513 to set the null-byte)
 
-	while (this->_buffer.find_first_of("\r\n") == std::string::npos)
+	while (this->_buffer.find("\r\n") == std::string::npos)
 	{
 		received = Networking::Recv(this->_socket, buffer, sizeof(buffer) - 1);
 
@@ -23,16 +23,17 @@ bool			Client::receivePacket()
 	return true;
 }
 
+// FIX!!!
 std::string		Client::getPacket()
 {
 	size_t		pos;
 	std::string	packet;
 
-	pos = this->_buffer.find_first_of("\r\n");
+	pos = this->_buffer.find("\r\n");
 	if (pos == std::string::npos)
 		throw std::runtime_error("getPacket() called without CRLF present in buffer");
 
-	pos += 2; // include CRLF
+	pos += 1; // include CRLF
 	packet = this->_buffer.substr(0, pos);
 	this->_buffer.erase(0, pos);
 

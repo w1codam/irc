@@ -25,6 +25,11 @@ Server::~Server()
 	// delete all users
 }
 
+bool	Server::checkPassword(std::string password)
+{
+	return this->_password == password;
+}
+
 void	Server::Serve()
 {
 	size_t							nfds;

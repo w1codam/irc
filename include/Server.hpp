@@ -28,6 +28,7 @@ public:
 
 	void		Serve();							// main loop
 	Client*		getClient(std::string nickname);	// maybe should not throw idk
+	bool		checkPassword(std::string password);
 private:
 	Client*		addClient(int fd);					// makes new client, set fd
 	Client*		getClient(int fd);					// throws if the fd is not found in the map

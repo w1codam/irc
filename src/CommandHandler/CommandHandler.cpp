@@ -7,6 +7,7 @@ CommandHandler::CommandHandler(Server& server):
 	// alloc/set all commands
 	this->_commands["NICK"] = new cNick(this->_server);
 	this->_commands["USER"] = new cUser(this->_server);
+	this->_commands["PASS"] = new cPass(this->_server);
 }
 
 CommandHandler::~CommandHandler()
