@@ -33,9 +33,8 @@ std::string		Client::getPacket()
 	if (pos == std::string::npos)
 		throw std::runtime_error("getPacket() called without CRLF present in buffer");
 
-	pos += 1; // include CRLF
 	packet = this->_buffer.substr(0, pos);
-	this->_buffer.erase(0, pos);
+	this->_buffer.erase(0, pos + 2);
 
 	return packet;
 }

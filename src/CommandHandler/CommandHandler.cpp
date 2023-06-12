@@ -3,8 +3,6 @@
 CommandHandler::CommandHandler(Server& server):
 	_server(server)
 {
-	(void)this->_server;
-	// alloc/set all commands
 	this->_commands["NICK"] = new cNick(this->_server);
 	this->_commands["USER"] = new cUser(this->_server);
 	this->_commands["PASS"] = new cPass(this->_server);
@@ -49,12 +47,9 @@ void	CommandHandler::Invoke(Client* client, std::string packet) const
 
 	try
 	{
-		raw_command = arguments[0];
+		raw_command = arguments.at(0);
 		command = this->getCommand(raw_command);
 		arguments.erase(arguments.begin());
-
-		// if (!client->Authenticated() && command->authRequired())
-		// 	return (void)client->queuePacket(ERR_NOTREGISTERED(client->getNickname()));
 
 		try									{ command->Execute(client, arguments); }
 		catch (const std::out_of_range& e)	{ client->queuePacket(ERR_NEEDMOREPARAMS(client->getNickname(), raw_command)); }
