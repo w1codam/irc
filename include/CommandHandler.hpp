@@ -9,7 +9,6 @@
 #include "Client.hpp"
 #include "Replies.hpp"
 #include "Command.hpp"
-#include "Commands.hpp"
 
 class Server;
 class Command;

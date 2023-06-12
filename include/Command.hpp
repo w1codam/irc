@@ -30,4 +30,22 @@ public:
 	void	Execute(Client* client, std::vector<std::string>& arguments);
 };
 
+
+class cPass: public Command
+{
+public:
+	cPass(Server& server);
+	~cPass();
+	void	Execute(Client* client, std::vector<std::string>& arguments);
+};
+
+
+class cUser: public Command
+{
+public:
+	cUser(Server& server);
+	~cUser();
+	void	Execute(Client* client, std::vector<std::string>& arguments);
+};
+
 #endif

@@ -27,7 +27,6 @@ Server::~Server()
 
 void	Server::Serve()
 {
-	DEBUG(std::cout << "serve called" << std::endl;)
 	size_t							nfds;
 	Client*							client;
 	std::vector<pollfd>::iterator	it;

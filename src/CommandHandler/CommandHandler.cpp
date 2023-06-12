@@ -6,6 +6,7 @@ CommandHandler::CommandHandler(Server& server):
 	(void)this->_server;
 	// alloc/set all commands
 	this->_commands["NICK"] = new cNick(this->_server);
+	this->_commands["USER"] = new cUser(this->_server);
 }
 
 CommandHandler::~CommandHandler()
@@ -39,8 +40,6 @@ std::vector<std::string>	CommandHandler::parseArguments(std::string& packet) con
 
 void	CommandHandler::Invoke(Client* client, std::string packet) const
 {
-	DEBUG(std::cout << "CH client " << client->getSocket() << ": " << packet;)
-
 	std::vector<std::string>	arguments;
 	std::string					raw_command("NONE");
 	Command*					command;
