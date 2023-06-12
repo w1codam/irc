@@ -16,6 +16,20 @@ Client*	Server::getClient(int fd)
 	return this->_clients.at(fd);
 }
 
+Client*	Server::getClient(std::string nickname)
+{
+	std::map<int, Client*>::iterator	it;
+
+	it = this->_clients.begin();
+	while (it != this->_clients.end())
+	{
+		if (it->second->getNickname() == nickname)
+			return it->second;
+		++it;
+	}
+	throw std::runtime_error("could not find client");
+}
+
 void	Server::removeClient(int fd)
 {
 	std::map<int, Client*>::iterator	it;

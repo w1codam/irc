@@ -1,5 +1,10 @@
 #include "Client.hpp"
 
+bool		Client::Authenticated()
+{
+	return this->_authenticated;
+}
+
 std::string	Client::getNickname()
 {
 	return this->_nickname;

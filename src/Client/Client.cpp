@@ -1,6 +1,7 @@
 #include "Client.hpp"
 
 Client::Client():
+	_authenticated(false),
 	_socket(-1)
 {}
 

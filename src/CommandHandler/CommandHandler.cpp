@@ -48,6 +48,10 @@ void	CommandHandler::Invoke(Client* client, std::string packet) const
 		raw_command = arguments[0];
 		command = this->getCommand(raw_command);
 		arguments.erase(arguments.begin());
+
+		// if (!client->Authenticated() && command->authRequired())
+		// 	return (void)client->queuePacket("yuhyuh");
+
 		command->Execute(client, arguments);
 	}
 	catch(const std::exception& e)

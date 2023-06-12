@@ -13,7 +13,9 @@ private: // irc related variables
 	std::string					_nickname;
 	std::string					_username;
 	std::string					_realname;
+	bool						_authenticated;
 public:
+	bool						Authenticated();
 	std::string					getNickname();
 	std::string					getUsername();
 	std::string					getRealname();
@@ -25,6 +27,16 @@ private:
 	std::queue<std::string>		_queue;
 	std::string					_buffer;
 	sockaddr_in					_addr;
+private:
+	/*
+	 * sendPacket() sends the current packet
+	 * it basically does what processQueue does but for a single packet
+	 * if no data could be sent while mid-packet, it truncates what has been sent
+	 * 
+	 * if the full packet has been transmitted, it returns true
+	 * else it returns false
+	 */
+	bool	sendPacket();
 public:
 	Client();
 	~Client();
@@ -41,16 +53,6 @@ public:
 	 * else it returns false
 	 */
 	bool	processQueue();
-
-	/*
-	 * sendPacket() sends the current packet
-	 * it basically does what processQueue does but for a single packet
-	 * if no data could be sent while mid-packet, it truncates what has been sent
-	 * 
-	 * if the full packet has been transmitted, it returns true
-	 * else it returns false
-	 */
-	bool	sendPacket();
 	void	queuePacket(std::string packet);	// simply append a packet to the queue
 	size_t	getQueueSize();
 

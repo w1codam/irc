@@ -8,3 +8,7 @@ Command::Command(const Server& server, const bool authRequired):
 Command::~Command()
 {}
 
+bool	Command::authRequired()
+{
+	return this->_authRequired;
+}

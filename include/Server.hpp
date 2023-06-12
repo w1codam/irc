@@ -26,14 +26,15 @@ public:
 	Server(std::string port, std::string password);
 	~Server();
 
-	void		Serve();					// main loop
+	void		Serve();							// main loop
 
 private:
-	Client*		addClient(int fd);			// makes new client, set fd
-	Client*		getClient(int fd);			// throws if the fd is not found in the map
-	void		removeClient(int fd);		// this function should also remove the client from all channels
+	Client*		addClient(int fd);					// makes new client, set fd
+	Client*		getClient(int fd);					// throws if the fd is not found in the map
+	Client*		getClient(std::string nickname);	// maybe should not throw idk
+	void		removeClient(int fd);				// this function should also remove the client from all channels
 
-	void		addPoll(int fd, short events);			// functions to add to poll array, and set/remove flags (eg. POLLOUT)
+	void		addPoll(int fd, short events);		// functions to add to poll array, and set/remove flags (eg. POLLOUT)
 	void		setPFlag(pollfd &pfd, short events);
 	void		removePFlag(pollfd &pfd, short events);
 
