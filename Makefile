@@ -6,7 +6,7 @@ INC		:= -I include
 SRC_DIR	:= src
 OBJ_DIR	:= obj
 
-SRCS	:= $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*/*.cpp)
+SRCS	:= $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*/*.cpp) $(wildcard $(SRC_DIR)/*/*/*.cpp)
 OBJS	:= $(subst src, obj, $(SRCS:.cpp=.o))
 
 

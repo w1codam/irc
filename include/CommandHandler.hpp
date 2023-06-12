@@ -1,6 +1,7 @@
 #ifndef COMMANDHANDLER_H
 #define COMMANDHANDLER_H
 
+#include <sstream>
 #include <string>
 #include <map>
 
@@ -8,6 +9,7 @@
 #include "Client.hpp"
 #include "Replies.hpp"
 #include "Command.hpp"
+#include "Commands.hpp"
 
 class Server;
 class Command;
@@ -15,13 +17,13 @@ class Command;
 class CommandHandler
 {
 private:
-	const Server&						_server;
+	Server&								_server;
 	std::map<std::string, Command*>		_commands;
 private:
 	std::vector<std::string>			parseArguments(std::string& packet) const;
 	Command*							getCommand(std::string& command) const;
 public:
-	CommandHandler(const Server& server);
+	CommandHandler(Server& server);
 	~CommandHandler();
 
 	void	Invoke(Client* client, std::string packet) const;

@@ -1,9 +1,11 @@
 #include "CommandHandler.hpp"
 
-CommandHandler::CommandHandler(const Server& server):
+CommandHandler::CommandHandler(Server& server):
 	_server(server)
 {
+	(void)this->_server;
 	// alloc/set all commands
+	this->_commands["NICK"] = new cNick(this->_server);
 }
 
 CommandHandler::~CommandHandler()
@@ -25,20 +27,22 @@ Command*					CommandHandler::getCommand(std::string& command) const
 
 std::vector<std::string>	CommandHandler::parseArguments(std::string& packet) const
 {
+	std::stringstream			ss(packet);
 	std::vector<std::string>	arguments;
+	std::string					part;
 
-	arguments.push_back(packet);
+	while (ss >> part)
+		arguments.push_back(part);
 
 	return arguments;
 }
 
 void	CommandHandler::Invoke(Client* client, std::string packet) const
 {
-	DEBUG((void)this->_server;)
 	DEBUG(std::cout << "CH client " << client->getSocket() << ": " << packet;)
 
 	std::vector<std::string>	arguments;
-	std::string					raw_command;
+	std::string					raw_command("NONE");
 	Command*					command;
 
 	arguments = this->parseArguments(packet);
@@ -50,9 +54,10 @@ void	CommandHandler::Invoke(Client* client, std::string packet) const
 		arguments.erase(arguments.begin());
 
 		// if (!client->Authenticated() && command->authRequired())
-		// 	return (void)client->queuePacket("yuhyuh");
+		// 	return (void)client->queuePacket(ERR_NOTREGISTERED(client->getNickname()));
 
-		command->Execute(client, arguments);
+		try									{ command->Execute(client, arguments); }
+		catch (const std::out_of_range& e)	{ client->queuePacket(ERR_NEEDMOREPARAMS(client->getNickname(), raw_command)); }
 	}
 	catch(const std::exception& e)
 	{
