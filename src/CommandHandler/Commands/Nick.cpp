@@ -9,7 +9,7 @@ cNick::~cNick()
 
 void	cNick::Execute(Client* client, std::vector<std::string>& arguments)
 {
-	std::string		nick(Command::getArgument(arguments));
+	std::string	nick(Command::getArgument(arguments));
 
 	try
 	{
