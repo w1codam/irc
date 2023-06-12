@@ -47,9 +47,8 @@ void	CommandHandler::Invoke(Client* client, std::string packet) const
 
 	try
 	{
-		raw_command = arguments.at(0);
+		raw_command = Command::getArgument(arguments);
 		command = this->getCommand(raw_command);
-		arguments.erase(arguments.begin());
 
 		try									{ command->Execute(client, arguments); }
 		catch (const std::out_of_range& e)	{ client->queuePacket(ERR_NEEDMOREPARAMS(client->getNickname(), raw_command)); }
