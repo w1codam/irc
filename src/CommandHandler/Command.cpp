@@ -1,8 +1,8 @@
 #include "Command.hpp"
 
 Command::Command(const Server& server, const bool authRequired):
-	_server(server),
-	_authRequired(authRequired)
+	_authRequired(authRequired),
+	_server(server)
 {}
 
 Command::~Command()
