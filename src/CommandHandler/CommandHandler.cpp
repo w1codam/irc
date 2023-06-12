@@ -12,7 +12,10 @@ CommandHandler::~CommandHandler()
 
 	it = this->_commands.begin();
 	while (it != this->_commands.end())
-		delete it->second; ++it;
+	{
+		delete it->second;
+		++it;
+	}
 }
 
 Command*					CommandHandler::getCommand(std::string& command) const

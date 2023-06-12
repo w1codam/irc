@@ -2,7 +2,7 @@
 
 Server::Server(std::string port, std::string password):
 	_socket(-1),
-	_port(std::stoi(port)),
+	_port(atoi(port.c_str())),
 	_password(password),
 	_commandHandler(new CommandHandler(*this))
 {

@@ -1,6 +1,8 @@
 #ifndef NETWORKING_H
 #define NETWORKING_H
 
+#include <cstdlib>
+#include <errno.h>
 #include <exception>
 #include <sys/socket.h>
 #include <netinet/in.h>
