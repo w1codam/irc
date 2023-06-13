@@ -16,6 +16,6 @@ void	cNick::Execute(Client* client, Arguments& arguments)
 
 	client->setNickname(nick);
 
-	if (client->Authenticated())
+	if (client->Authenticated() || !client->getUsername().empty())
 		client->queuePacket(RPL_WELCOME(client->getNickname()));
 }
