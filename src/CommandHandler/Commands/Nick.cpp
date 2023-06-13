@@ -7,9 +7,9 @@ cNick::cNick(Server& server):
 cNick::~cNick()
 {}
 
-void	cNick::Execute(Client* client, std::vector<std::string>& arguments)
+void	cNick::Execute(Client* client, Arguments& arguments)
 {
-	std::string	nick(Command::getArgument(arguments));
+	std::string	nick(arguments.popArgument());
 
 	try
 	{

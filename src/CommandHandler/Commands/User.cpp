@@ -7,12 +7,12 @@ cUser::cUser(Server& server):
 cUser::~cUser()
 {}
 
-void	cUser::Execute(Client* client, std::vector<std::string>& arguments)
+void	cUser::Execute(Client* client, Arguments& arguments)
 {
-	std::string	username	(Command::getArgument(arguments));
-	std::string	mode    	(Command::getArgument(arguments));
-	std::string	_			(Command::getArgument(arguments));
-	std::string	realname	(Command::getArgument(arguments));
+	std::string	username	(arguments.popArgument());
+	std::string	mode    	(arguments.popArgument());
+	std::string	_			(arguments.popArgument());
+	std::string	realname	(arguments.popArgument());
 
 	if (client->getNickname().empty())
 		return (void)client->queuePacket("NOIMPL: no nick set");

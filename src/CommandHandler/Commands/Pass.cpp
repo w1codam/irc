@@ -7,8 +7,8 @@ cPass::cPass(Server& server):
 cPass::~cPass()
 {}
 
-void	cPass::Execute(Client* client, std::vector<std::string>& arguments)
+void	cPass::Execute(Client* client, Arguments& arguments)
 {
-	std::string	pass(Command::getArgument(arguments));
+	std::string	pass(arguments.popArgument());
 	(void)client;
 }

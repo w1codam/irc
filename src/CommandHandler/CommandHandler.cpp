@@ -39,18 +39,16 @@ std::vector<std::string>	CommandHandler::parseArguments(std::string& packet) con
 
 void	CommandHandler::Invoke(Client* client, std::string packet) const
 {
-	std::vector<std::string>	arguments;
-	std::string					raw_command("NONE");
-	Command*					command;
-
-	arguments = this->parseArguments(packet);
+	Arguments		args(packet);
+	std::string		raw_command("NONE");
+	Command*		command;
 
 	try
 	{
-		raw_command = Command::getArgument(arguments);
+		raw_command = args.popArgument();
 		command = this->getCommand(raw_command);
 
-		try									{ command->Execute(client, arguments); }
+		try									{ command->Execute(client, args); }
 		catch (const std::out_of_range& e)	{ client->queuePacket(ERR_NEEDMOREPARAMS(client->getNickname(), raw_command)); }
 	}
 	catch(const std::exception& e)
