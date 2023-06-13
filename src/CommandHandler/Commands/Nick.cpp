@@ -15,4 +15,7 @@ void	cNick::Execute(Client* client, Arguments& arguments)
 		return (void)client->queuePacket(ERR_NICKNAMEINUSE(client->getNickname()));
 
 	client->setNickname(nick);
+
+	if (client->Authenticated())
+		client->queuePacket(RPL_WELCOME(client->getNickname()));
 }
