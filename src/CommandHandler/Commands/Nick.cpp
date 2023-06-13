@@ -11,14 +11,8 @@ void	cNick::Execute(Client* client, Arguments& arguments)
 {
 	std::string	nick(arguments.popArgument());
 
-	try
-	{
-		this->_server.getClient(nick);
-		client->queuePacket("NOIMPL: nick in use");
-	}
-	catch (const std::exception& e)
-	{
-		client->setNickname(nick);
-		client->queuePacket("NOIMPL: lmao nice bro!");
-	}
+	if (this->_server.getClient(nick))
+		return (void)client->queuePacket(ERR_NICKNAMEINUSE(client->getNickname()));
+
+	client->setNickname(nick);
 }

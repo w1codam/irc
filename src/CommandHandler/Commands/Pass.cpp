@@ -10,5 +10,6 @@ cPass::~cPass()
 void	cPass::Execute(Client* client, Arguments& arguments)
 {
 	std::string	pass(arguments.popArgument());
-	(void)client;
+	
+	client->setServerPassword(pass);
 }

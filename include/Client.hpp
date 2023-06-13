@@ -13,15 +13,19 @@ private: // irc related variables
 	std::string					_nickname;
 	std::string					_username;
 	std::string					_realname;
+	std::string					_server_password;
 	bool						_authenticated;
 public:
 	bool						Authenticated();
 	std::string					getNickname();
 	std::string					getUsername();
 	std::string					getRealname();
+	std::string					getServerPassword();
 	void						setNickname(std::string nickname);
 	void						setUsername(std::string username);
 	void						setRealname(std::string realname);
+	void						setServerPassword(std::string password);
+	void						setAuthenticated();
 private:
 	int							_socket;
 	std::queue<std::string>		_queue;

@@ -20,6 +20,11 @@ std::string	Client::getRealname()
 	return this->_realname;
 }
 
+std::string	Client::getServerPassword()
+{
+	return this->_server_password;
+}
+
 void		Client::setNickname(std::string nickname)
 {
 	this->_nickname = nickname;
@@ -33,4 +38,14 @@ void		Client::setUsername(std::string username)
 void		Client::setRealname(std::string realname)
 {
 	this->_realname = realname;
+}
+
+void		Client::setServerPassword(std::string password)
+{
+	this->_server_password = password;
+}
+
+void		Client::setAuthenticated()
+{
+	this->_authenticated = true;
 }

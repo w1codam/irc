@@ -20,6 +20,9 @@ Client*	Server::getClient(std::string nickname)
 {
 	std::map<int, Client*>::iterator	it;
 
+	if (!nickname.length())	// just in case a non-nicknamed user is queried
+		return NULL;
+
 	it = this->_clients.begin();
 	while (it != this->_clients.end())
 	{
@@ -27,7 +30,8 @@ Client*	Server::getClient(std::string nickname)
 			return it->second;
 		++it;
 	}
-	throw std::runtime_error("could not find client");
+	return NULL;
+	// throw std::runtime_error("could not find client");
 }
 
 void	Server::removeClient(int fd)

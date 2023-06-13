@@ -27,7 +27,7 @@ public:
 	~Server();
 
 	void		Serve();							// main loop
-	Client*		getClient(std::string nickname);	// maybe should not throw idk
+	Client*		getClient(std::string nickname);	// does not throw
 	bool		checkPassword(std::string password);
 private:
 	Client*		addClient(int fd);					// makes new client, set fd
