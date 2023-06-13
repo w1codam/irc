@@ -20,7 +20,7 @@ void	cUser::Execute(Client* client, Arguments& arguments)
 	if (client->Authenticated())
 		return (void)client->queuePacket(ERR_ALREADYREGISTERED(client->getNickname()));
 
-	if (this->_server.checkPassword(client->getServerPassword()))
+	if (!this->_server.checkPassword(client->getServerPassword()))
 		return (void)client->queuePacket(ERR_PASSWDMISMATCH(client->getNickname()));
 
 	client->setAuthenticated();
