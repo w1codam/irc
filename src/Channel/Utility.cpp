@@ -20,7 +20,7 @@ void		Channel::setTopicOpsOnly(bool mode)
 	this->_topic_ops_only = mode;
 }
 
-void		Channel::setUserLimit(uint32_t limit)
+void		Channel::setUserLimit(size_t limit)
 {
 	this->_user_limit = limit;
 }
@@ -40,7 +40,7 @@ bool		Channel::getTopicOpsOnly()
 	return this->_topic_ops_only;
 }
 
-uint32_t	Channel::getUserLimit()
+size_t		Channel::getUserLimit()
 {
 	return this->_user_limit;
 }

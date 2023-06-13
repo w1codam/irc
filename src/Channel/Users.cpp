@@ -102,3 +102,7 @@ void	Channel::removeInvited(Client* client)
 	}
 }
 
+size_t	Channel::Size()
+{
+	return this->_members.size();
+}
