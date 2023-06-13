@@ -37,7 +37,7 @@ void	CommandHandler::Invoke(Client* client, std::string packet) const
 		command = this->getCommand(raw_command);
 
 		if (command->authRequired() && client->Authenticated())
-			return (void) client->queuePacket(ERR_UNKNOWNERROR("UNAUTHORIZED")); // NOIMPL : should return appropriate response
+			return (void) client->queuePacket(ERR_NOTREGISTERED(client->getNickname())); // nickname may not be set yet :/
 
 		try									{ command->Execute(client, args); }
 		catch (const std::out_of_range& e)	{ client->queuePacket(ERR_NEEDMOREPARAMS(client->getNickname(), raw_command)); }
