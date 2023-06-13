@@ -8,6 +8,7 @@
 #include "Debug.hpp"
 #include "CommandHandler.hpp"
 #include "Networking.hpp"
+#include "Channel.hpp"
 #include "Client.hpp"
 
 class CommandHandler;
@@ -20,8 +21,9 @@ private:
 	const std::string		_password;
 	const CommandHandler*	_commandHandler;
 
-	std::vector<pollfd>		_pollfds;
-	std::map<int, Client*>	_clients;
+	std::vector<pollfd>				_pollfds;
+	std::map<int, Client*>			_clients;
+	std::map<std::string, Channel*>	_channels;
 public:
 	Server(std::string port, std::string password);
 	~Server();
@@ -33,6 +35,10 @@ private:
 	Client*		addClient(int fd);					// makes new client, set fd
 	Client*		getClient(int fd);					// throws if the fd is not found in the map
 	void		removeClient(int fd);				// this function should also remove the client from all channels
+
+	Channel*	addChannel(std::string channel, std::string password);
+	Channel*	getChannel(std::string channel);
+	void		removeChannel(std::string channel);
 
 	void		addPoll(int fd, short events);		// functions to add to poll array, and set/remove flags (eg. POLLOUT)
 	void		setPFlag(pollfd &pfd, short events);
