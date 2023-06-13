@@ -20,21 +20,9 @@ CommandHandler::~CommandHandler()
 	}
 }
 
-Command*					CommandHandler::getCommand(std::string& command) const
+Command*	CommandHandler::getCommand(std::string& command) const
 {
 	return this->_commands.at(command);
-}
-
-std::vector<std::string>	CommandHandler::parseArguments(std::string& packet) const
-{
-	std::stringstream			ss(packet);
-	std::vector<std::string>	arguments;
-	std::string					part;
-
-	while (ss >> part)
-		arguments.push_back(part);
-
-	return arguments;
 }
 
 void	CommandHandler::Invoke(Client* client, std::string packet) const
@@ -47,6 +35,9 @@ void	CommandHandler::Invoke(Client* client, std::string packet) const
 	{
 		raw_command = args.popArgument();
 		command = this->getCommand(raw_command);
+
+		if (command->authRequired() && client->Authenticated())
+			return (void) client->queuePacket(ERR_UNKNOWNERROR("UNAUTHORIZED")); // NOIMPL : should return appropriate response
 
 		try									{ command->Execute(client, args); }
 		catch (const std::out_of_range& e)	{ client->queuePacket(ERR_NEEDMOREPARAMS(client->getNickname(), raw_command)); }
