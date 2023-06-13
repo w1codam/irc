@@ -34,17 +34,20 @@ public:
 	uint32_t	getUserLimit();
 	bool		checkPassword(std::string password);
 public:
+	Channel(std::string name, std::string password);
+	~Channel();
+
 	void	sendMessage(std::string message);	// for each member, append this to queue
 
 	bool	isMember(Client* client);
 	bool	isOperator(Client* client);
 	bool	isInvited(Client* client);
 
-	void	addUser(Client* client);
+	void	addMember(Client* client);
 	void	addOperator(Client* client);
 	void	addInvited(Client* client);
 
-	void	removeUser(Client* client);
+	void	removeMember(Client* client);
 	void	removeOperator(Client* client);
 	void	removeInvited(Client* client);
 };
