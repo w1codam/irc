@@ -22,3 +22,14 @@ std::string	Arguments::popArgument()
 
 	return arg;
 }
+
+std::string	Arguments::getRemaining()
+{
+	std::string	full;
+
+	full = this->popArgument();
+	while (this->_queue.size())
+		full += " " + this->popArgument();
+
+	return full;
+}

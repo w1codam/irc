@@ -14,6 +14,7 @@ public:
 	~Arguments();
 
 	std::string		popArgument();
+	std::string		getRemaining();
 };
 
 #endif
