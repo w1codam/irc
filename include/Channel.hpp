@@ -5,6 +5,7 @@
 
 #include "Debug.hpp"
 #include "Client.hpp"
+#include "Replies.hpp"
 #include "Networking.hpp"
 
 class Channel
