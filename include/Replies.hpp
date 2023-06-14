@@ -5,6 +5,8 @@
 #define RPL_WELCOME(origin)						"001 :Welcome " + origin
 #define RPL_PRIVMSG(origin, target, message)	":" + origin + " PRIVMSG " + target + " :" + message
 #define RPL_PART(origin, channel)				":" + origin + " PART :" + channel
+#define RPL_JOIN(origin, channel)				":" + origin + " JOIN :" + channel
+#define RPL_TOPIC(origin, channel, topic)		":" + origin + " TOPIC " + channel + " :" + topic
 
 // 4xx (error)
 #define ERR_UNKNOWNERROR(command)				"400 " + std::string(command) + ":Unknown error"
@@ -17,5 +19,7 @@
 #define ERR_ALREADYREGISTERED(origin)			"462 " + origin + " :You are already registered"
 #define ERR_PASSWDMISMATCH(origin)				"464 " + origin + " :Incorrect password"
 #define ERR_BADCHANNELKEY(origin, channel)		"475 " + origin + " #" + channel + " :Cannot join channel (+k)"
+#define ERR_CHANOPRIVSNEEDED(origin, channel)	"482 " + origin + " " + channel + " :You're not channel operator"
+
 
 #endif

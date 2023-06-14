@@ -14,9 +14,6 @@ void	cUser::Execute(Client* client, Arguments& arguments)
 	std::string	_			(arguments.popArgument());
 	std::string	realname	(arguments.popArgument());
 
-	// if (client->getNickname().empty())	// there is no error for when no nickname is set yet...?
-	// 	return (void)client->queuePacket(ERR_NOTREGISTERED(client->getNickname()));
-
 	if (client->Authenticated())
 		return (void)client->queuePacket(ERR_ALREADYREGISTERED(client->getNickname()));
 

@@ -78,5 +78,13 @@ public:
 	void	Execute(Client* client, Arguments& arguments);
 };
 
+class cTopic: public Command
+{
+public:
+	cTopic(Server& server);
+	~cTopic();
+	void	Execute(Client* client, Arguments& arguments);
+};
+
 
 #endif
