@@ -70,4 +70,13 @@ public:
 	void	Execute(Client* client, Arguments& arguments);
 };
 
+class cKick: public Command
+{
+public:
+	cKick(Server& server);
+	~cKick();
+	void	Execute(Client* client, Arguments& arguments);
+};
+
+
 #endif

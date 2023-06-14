@@ -68,8 +68,6 @@ void	Channel::removeMember(Client* client)
 {
 	std::vector<Client*>::iterator	it;
 
-	this->removeOperator(client);
-
 	it = this->_members.begin();
 	while (it != this->_members.end())
 	{

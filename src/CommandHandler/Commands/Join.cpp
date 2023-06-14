@@ -13,11 +13,13 @@ void	cJoin::Execute(Client* client, Arguments& arguments)
 	std::string	password;
 
 	Channel*	channel_ptr;
+	bool		is_new;
 
 	if (arguments.Size())
 		password = arguments.popArgument();
 
 	channel_ptr = this->_server.getChannel(channel);
+	is_new = !channel_ptr;
 	if (!channel_ptr)
 		channel_ptr = this->_server.addChannel(channel, password);
 	
@@ -28,4 +30,6 @@ void	cJoin::Execute(Client* client, Arguments& arguments)
 		return (void)client->queuePacket(ERR_BADCHANNELKEY(client->getNickname(), channel));
 
 	channel_ptr->addMember(client);
+	if (is_new)
+		channel_ptr->addOperator(client);
 }
