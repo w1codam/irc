@@ -27,7 +27,7 @@ void	cPrivMsg::toClient(Client* client, std::string& target, Arguments& argument
 	if (!client_ptr)
 		return (void)client->queuePacket(ERR_NOSUCHNICK(client->getNickname(), target));
 
-	client_ptr->queuePacket(RPL_PRIVMSG(client->getNickname(), target, arguments.getRemaining()));
+	client_ptr->queuePacket(RPL_PRIVMSG(client->getNickname(), target, arguments.getRemaining().substr(1)));
 }
 
 
