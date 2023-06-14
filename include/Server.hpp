@@ -31,14 +31,14 @@ public:
 	void		Serve();							// main loop
 	Client*		getClient(std::string nickname);	// does not throw
 	bool		checkPassword(std::string password);
-private:
-	Client*		addClient(int fd);					// makes new client, set fd
-	Client*		getClient(int fd);					// throws if the fd is not found in the map
-	void		removeClient(int fd);				// this function should also remove the client from all channels
 
 	Channel*	addChannel(std::string channel, std::string password);
 	Channel*	getChannel(std::string channel);
 	void		removeChannel(std::string channel);
+private:
+	Client*		addClient(int fd);					// makes new client, set fd
+	Client*		getClient(int fd);					// throws if the fd is not found in the map
+	void		removeClient(int fd);				// this function should also remove the client from all channels
 
 	void		addPoll(int fd, short events);		// functions to add to poll array, and set/remove flags (eg. POLLOUT)
 	void		setPFlag(pollfd &pfd, short events);

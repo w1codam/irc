@@ -15,6 +15,7 @@ public:
 
 	std::string		popArgument();
 	std::string		getRemaining();
+	size_t			Size();
 };
 
 #endif

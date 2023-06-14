@@ -6,6 +6,8 @@ CommandHandler::CommandHandler(Server& server):
 	this->_commands["NICK"] = new cNick(this->_server);
 	this->_commands["USER"] = new cUser(this->_server);
 	this->_commands["PASS"] = new cPass(this->_server);
+	this->_commands["JOIN"] = new cJoin(this->_server);
+	this->_commands["PRIVMSG"] = new cPrivMsg(this->_server);
 }
 
 CommandHandler::~CommandHandler()
@@ -36,7 +38,7 @@ void	CommandHandler::Invoke(Client* client, std::string packet) const
 		raw_command = args.popArgument();
 		command = this->getCommand(raw_command);
 
-		if (command->authRequired() && client->Authenticated())
+		if (command->authRequired() && !client->Authenticated())
 			return (void) client->queuePacket(ERR_NOTREGISTERED(client->getNickname())); // nickname may not be set yet :/
 
 		try									{ command->Execute(client, args); }

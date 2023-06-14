@@ -33,3 +33,8 @@ std::string	Arguments::getRemaining()
 
 	return full;
 }
+
+size_t	Arguments::Size()
+{
+	return this->_queue.size();
+}

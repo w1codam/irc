@@ -2,8 +2,12 @@
 
 Channel::Channel(std::string name, std::string password):
 	_name(name),
-	_password(password)
-{}
+	_password(password),
+	_invite_only(false),
+	_topic_ops_only(false),
+	_user_limit(0)
+{
+}
 
 Channel::~Channel()
 {

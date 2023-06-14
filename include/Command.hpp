@@ -6,8 +6,10 @@
 
 #include "Server.hpp"
 #include "Client.hpp"
+#include "Channel.hpp"
 #include "Arguments.hpp"
 
+class Channel;
 class Server;
 
 class Command
@@ -46,6 +48,25 @@ class cUser: public Command
 public:
 	cUser(Server& server);
 	~cUser();
+	void	Execute(Client* client, Arguments& arguments);
+};
+
+
+class cJoin: public Command
+{
+public:
+	cJoin(Server& server);
+	~cJoin();
+	void	Execute(Client* client, Arguments& arguments);
+};
+
+class cPrivMsg: public Command
+{
+public:
+	cPrivMsg(Server& server);
+	~cPrivMsg();
+	void	toChannel(Client* client, std::string& target, Arguments& arguments);
+	void	toClient(Client* client, std::string& target, Arguments& arguments);
 	void	Execute(Client* client, Arguments& arguments);
 };
 
