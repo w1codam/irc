@@ -9,11 +9,15 @@ cJoin::~cJoin()
 
 void	cJoin::Execute(Client* client, Arguments& arguments)
 {
-	std::string	channel(arguments.popArgument().substr(1));
+	std::string	channel(arguments.popArgument());
 	std::string	password;
 
 	Channel*	channel_ptr;
 	bool		is_new;
+
+	if (channel[0] != '#')
+		return (void)client->queuePacket("NOIMPL: wrong channel format");
+	channel.erase(0, 1);
 
 	if (arguments.Size())
 		password = arguments.popArgument();
