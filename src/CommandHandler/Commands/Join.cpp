@@ -32,6 +32,9 @@ void	cJoin::Execute(Client* client, Arguments& arguments)
 	if (channel_ptr->isMember(client))
 		return (void)client->queuePacket("NOIMPL: already a member");
 
+	if (channel_ptr->getInviteOnly() && !channel_ptr->isInvited(client))
+		return (void)client->queuePacket("NOIMPL: ur not invited");
+
 	channel_ptr->addMember(client);
 	if (is_new)
 		channel_ptr->addOperator(client);

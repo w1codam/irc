@@ -86,5 +86,13 @@ public:
 	void	Execute(Client* client, Arguments& arguments);
 };
 
+class cInvite: public Command
+{
+public:
+	cInvite(Server& server);
+	~cInvite();
+	void	Execute(Client* client, Arguments& arguments);
+};
+
 
 #endif
