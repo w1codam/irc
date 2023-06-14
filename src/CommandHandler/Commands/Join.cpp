@@ -29,6 +29,9 @@ void	cJoin::Execute(Client* client, Arguments& arguments)
 	if (!channel_ptr->checkPassword(password))
 		return (void)client->queuePacket(ERR_BADCHANNELKEY(client->getNickname(), channel));
 
+	if (channel_ptr->isMember(client))
+		return (void)client->queuePacket("NOIMPL: already a member");
+
 	channel_ptr->addMember(client);
 	if (is_new)
 		channel_ptr->addOperator(client);

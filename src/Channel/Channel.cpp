@@ -18,7 +18,6 @@ void	Channel::sendMessage(std::string message)
 {
 	std::vector<Client*>::iterator	it;
 
-	message.replace(message.find("$NICKNAME"), sizeof("$NICKNAME") - 1, (*it)->getNickname());
 	it = this->_members.begin();
 	while (it != this->_members.end())
 	{

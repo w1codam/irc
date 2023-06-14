@@ -74,7 +74,7 @@ void	Channel::removeMember(Client* client)
 		if (*it == client)	it = this->_members.erase(it);
 		else				++it;
 	}
-	this->sendMessage(RPL_PART(std::string("$NICKNAME"), std::string("#") + this->_name));
+	this->sendMessage(RPL_PART(client->getNickname(), std::string("#") + this->_name));
 }
 
 void	Channel::removeOperator(Client* client)
