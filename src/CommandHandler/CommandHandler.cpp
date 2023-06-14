@@ -8,6 +8,7 @@ CommandHandler::CommandHandler(Server& server):
 	this->_commands["PASS"] = new cPass(this->_server);
 	this->_commands["JOIN"] = new cJoin(this->_server);
 	this->_commands["KICK"] = new cKick(this->_server);
+	this->_commands["TOPIC"] = new cTopic(this->_server);
 	this->_commands["PRIVMSG"] = new cPrivMsg(this->_server);
 }
 
