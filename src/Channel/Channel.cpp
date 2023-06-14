@@ -11,7 +11,14 @@ Channel::Channel(std::string name, std::string password):
 
 Channel::~Channel()
 {
-	this->sendMessage("NOIMPL: bye :D");
+	std::vector<Client*>::iterator	it;
+
+	it = this->_members.begin();
+	while (it != this->_members.end())
+	{
+		this->sendMessage(RPL_PART((*it)->getNickname(), std::string("#") + this->_name));
+		++it;
+	}
 }
 
 void	Channel::sendMessage(std::string message, Client* ignore)
