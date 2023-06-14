@@ -38,4 +38,5 @@ void	cJoin::Execute(Client* client, Arguments& arguments)
 	channel_ptr->addMember(client);
 	if (is_new)
 		channel_ptr->addOperator(client);
+	channel_ptr->sendMessage(RPL_JOIN(client->getNickname(), channel));
 }

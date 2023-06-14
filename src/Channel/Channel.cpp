@@ -14,7 +14,7 @@ Channel::~Channel()
 	this->sendMessage("NOIMPL: bye :D");
 }
 
-void	Channel::sendMessage(std::string message, Client* ignore = NULL)
+void	Channel::sendMessage(std::string message, Client* ignore)
 {
 	std::vector<Client*>::iterator	it;
 
