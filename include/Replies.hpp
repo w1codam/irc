@@ -2,7 +2,7 @@
 #define REPLIES_H
 
 // RPL
-#define RPL_WELCOME(origin)						"001 :Welcome " + origin
+#define RPL_WELCOME(origin)						"001 " + origin + " :Welcome " + origin
 #define RPL_PRIVMSG(origin, target, message)	":" + origin + " PRIVMSG " + target + " :" + message
 #define RPL_PART(origin, channel)				":" + origin + " PART :" + channel
 #define RPL_JOIN(origin, channel)				":" + origin + " JOIN :" + channel

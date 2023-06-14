@@ -17,7 +17,7 @@ void	cPrivMsg::toChannel(Client* client, std::string& target, Arguments& argumen
 	if (!channel_ptr->isMember(client))
 		return (void)client->queuePacket(ERR_CANNOTSENDTOCHAN(client->getNickname(), target));
 
-	channel_ptr->sendMessage(RPL_PRIVMSG(client->getNickname(), target, arguments.getRemaining()));
+	channel_ptr->sendMessage(RPL_PRIVMSG(client->getNickname(), target, arguments.getRemaining()), client);
 }
 
 void	cPrivMsg::toClient(Client* client, std::string& target, Arguments& arguments)
