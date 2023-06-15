@@ -67,7 +67,7 @@ void	cMode::Execute(Client* client, Arguments& arguments)
 			break;
 		}
 		case 'l':
-			if (add)	channel_ptr->setUserLimit(std::stoi(arguments.popArgument()));
+			if (add)	channel_ptr->setUserLimit(atoi(arguments.popArgument().c_str()));
 			else		channel_ptr->setUserLimit(0);
 			break;
 		default: client->queuePacket(ERR_UNKNOWNMODE(client->getNickname(), mode, channel));
