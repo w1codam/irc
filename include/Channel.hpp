@@ -34,6 +34,8 @@ public:
 	bool		getTopicOpsOnly();
 	size_t		getUserLimit();
 	bool		checkPassword(std::string password);
+
+	std::string	getModes();
 public:
 	Channel(std::string name, std::string password);
 	~Channel();

@@ -19,7 +19,7 @@ void	cKick::Execute(Client* client, Arguments& arguments)
 		return (void)client->queuePacket(ERR_NOSUCHNICK(client->getNickname(), channel));
 	if (!member_ptr)
 		return (void)client->queuePacket(ERR_NOSUCHNICK(client->getNickname(), member));
-	if (channel_ptr->isOperator(member_ptr))
+	if (!channel_ptr->isOperator(client))
 		return (void)client->queuePacket(ERR_CHANOPRIVSNEEDED(client->getNickname(), channel));
 	if (!channel_ptr->isMember(member_ptr))
 		return (void)client->queuePacket(ERR_NOSUCHNICK(client->getNickname(), channel));

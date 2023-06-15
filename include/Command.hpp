@@ -94,5 +94,13 @@ public:
 	void	Execute(Client* client, Arguments& arguments);
 };
 
+class cMode: public Command
+{
+public:
+	cMode(Server& server);
+	~cMode();
+	void	Execute(Client* client, Arguments& arguments);
+};
+
 
 #endif
