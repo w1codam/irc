@@ -6,7 +6,7 @@ int	main(int argc, char *argv[])
 {
 	if (argc != 3)
 	{
-		std::cerr << "usage: ./" << argv[0] << " <port> <password>" << std::endl;
+		std::cerr << "usage: " << argv[0] << " <port> <password>" << std::endl;
 		return (EXIT_FAILURE);
 	}
 
