@@ -18,11 +18,27 @@ Server::Server(std::string port, std::string password):
 
 Server::~Server()
 {
+	std::map<std::string, Channel*>::iterator	channel_it;
+	std::map<int, Client*>::iterator			client_it;
+
 	delete _commandHandler;
 	Networking::Close(this->_socket);
 
 	// delete all channels
+	channel_it = this->_channels.begin();
+	while (channel_it != this->_channels.end())
+	{
+		delete channel_it->second;
+		++channel_it;
+	}
+
 	// delete all users
+	client_it = this->_clients.begin();
+	while (client_it != this->_clients.end())
+	{
+		delete client_it->second;
+		++client_it;
+	}
 }
 
 bool	Server::checkPassword(std::string password)
