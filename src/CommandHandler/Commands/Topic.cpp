@@ -17,7 +17,7 @@ void	cTopic::Execute(Client* client, Arguments& arguments)
 	if (!channel_ptr)
 		return (void)client->queuePacket(ERR_NOSUCHNICK(client->getNickname(), channel));
 	if (!arguments.Size())
-		return (void)client->queuePacket(RPL_TOPIC(std::string("a channel operator"), channel, channel_ptr->getTopic()));
+		return (void)client->queuePacket(RPL_TOPIC(std::string("operator"), channel, channel_ptr->getTopic()));
 	
 	topic = arguments.getRemaining();
 	if (!channel_ptr->isOperator(client) && channel_ptr->getTopicOpsOnly())

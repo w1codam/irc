@@ -31,7 +31,6 @@ bool	Server::handleData(Client* client)
 	}
 	catch(const std::exception& e)
 	{
-		DEBUG(std::cerr << "error: " << e.what() << std::endl;)
 		this->handleDisconnect(client);
 		return false;
 	}

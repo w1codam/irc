@@ -39,8 +39,9 @@ void	cJoin::Execute(Client* client, Arguments& arguments)
 	if (channel_ptr->getInviteOnly() && !channel_ptr->isInvited(client))
 		return (void)client->queuePacket(ERR_INVITEONLY(client->getNickname(), channel));
 
+
+	channel_ptr->sendMessage(RPL_JOIN(client->getNickname(), channel));
 	channel_ptr->addMember(client);
 	if (is_new)
 		channel_ptr->addOperator(client);
-	channel_ptr->sendMessage(RPL_JOIN(client->getNickname(), channel));
 }

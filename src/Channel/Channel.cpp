@@ -2,6 +2,7 @@
 
 Channel::Channel(std::string name, std::string password):
 	_name(name),
+	_topic("no topic set"),
 	_password(password),
 	_invite_only(false),
 	_topic_ops_only(false),
