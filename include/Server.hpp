@@ -29,6 +29,7 @@ public:
 	~Server();
 
 	void		Serve();							// main loop
+	in_port_t	getPort();
 	Client*		getClient(std::string nickname);	// does not throw
 	bool		checkPassword(std::string password);
 

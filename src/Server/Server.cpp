@@ -104,3 +104,8 @@ void	Server::Serve()
 		++it;
 	}
 }
+
+in_port_t	Server::getPort()
+{
+	return this->_port;
+}

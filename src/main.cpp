@@ -2,13 +2,19 @@
 #include "Networking.hpp"
 #include "Server.hpp"
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
-	std::cout << "servin'" << std::endl;
+	if (argc != 3)
+	{
+		std::cerr << "usage: ./" << argv[0] << " <port> <password>" << std::endl;
+		return (EXIT_FAILURE);
+	}
 
 	try
 	{
-		Server	server("6667", "passw");
+		Server	server(argv[1], argv[2]);
+
+		std::cout << "servin' on :" << server.getPort() << std::endl;
 		while (true) server.Serve();
 	}
 	catch (const std::exception &e)
