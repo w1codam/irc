@@ -16,7 +16,7 @@ void	cJoin::Execute(Client* client, Arguments& arguments)
 	bool		is_new;
 
 	if (channel[0] != '#')
-		return (void)client->queuePacket("NOIMPL: wrong channel format");
+		return (void)client->queuePacket(ERR_NOSUCHNICK(client->getNickname(), channel));
 	channel.erase(0, 1);
 
 	if (arguments.Size())
@@ -28,16 +28,16 @@ void	cJoin::Execute(Client* client, Arguments& arguments)
 		channel_ptr = this->_server.addChannel(channel, password);
 	
 	if (channel_ptr->getUserLimit() && channel_ptr->getUserLimit() >= channel_ptr->Size())
-		return (void)client->queuePacket("NOIMPL: channel is full");
+		return (void)client->queuePacket(ERR_CHANNELISFULL(client->getNickname(), channel));
 	
 	if (!channel_ptr->checkPassword(password))
 		return (void)client->queuePacket(ERR_BADCHANNELKEY(client->getNickname(), channel));
 
 	if (channel_ptr->isMember(client))
-		return (void)client->queuePacket("NOIMPL: already a member");
+		return (void)client->queuePacket(RPL_JOIN(client->getNickname(), channel));
 
 	if (channel_ptr->getInviteOnly() && !channel_ptr->isInvited(client))
-		return (void)client->queuePacket("NOIMPL: ur not invited");
+		return (void)client->queuePacket(ERR_INVITEONLY(client->getNickname(), channel));
 
 	channel_ptr->addMember(client);
 	if (is_new)
