@@ -52,7 +52,7 @@ bool		Channel::checkPassword(std::string password)
 
 std::string	Channel::getModes()
 {
-	std::string	modes("+");
+	std::string	modes("+n");
 
 	if (this->_invite_only)			modes += 'i';
 	if (!this->_password.empty())	modes += 'k';

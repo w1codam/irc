@@ -50,6 +50,7 @@ void	Channel::addMember(Client* client)
 		this->removeInvited(client);
 	if (!this->isMember(client))
 		this->_members.push_back(client);
+	client->queuePacket(RPL_MODE(client->getNickname(), this->_name, this->getModes()));
 }
 
 void	Channel::addOperator(Client* client)
