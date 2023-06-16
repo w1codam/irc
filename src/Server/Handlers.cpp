@@ -52,6 +52,14 @@ void	Server::handleDisconnect(Client* client)
 {
 	DEBUG(std::cout << "client disconnected (fd " << client->getSocket() << ")" << std::endl;)
 	// remove client from all channels
+	std::map<std::string, Channel*>::iterator	it;
+
+	it = this->_channels.begin();
+	while (it != this->_channels.end())
+	{
+		it->second->removeMember(client);
+		++it;
+	}
 
 	delete client;
 }
