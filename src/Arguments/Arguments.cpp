@@ -20,6 +20,9 @@ std::string	Arguments::popArgument()
 	std::string	arg(this->_queue.front());	
 	this->_queue.pop();
 
+	// if (arg.size() == 1 && arg[0] == ':')
+		// throw std::out_of_range("queue is empty");
+
 	return arg;
 }
 

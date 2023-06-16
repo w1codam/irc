@@ -40,7 +40,7 @@ public:
 	Channel(std::string name, std::string password);
 	~Channel();
 
-	void		sendMessage(std::string message, Client* ignore = NULL);	// for each member, append this to queue
+	void		sendMessage(std::string message);	// for each member, append this to queue
 
 	bool		isMember(Client* client);
 	bool		isOperator(Client* client);

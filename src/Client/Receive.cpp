@@ -10,7 +10,10 @@ bool			Client::receivePacket()
 		received = Networking::Recv(this->_socket, buffer, sizeof(buffer) - 1);
 
 		if (received == -1 && errno == EAGAIN)
+		{
+			errno = 0;
 			return false;
+		}
 		if (received == -1)
 			throw Networking::NetworkingException("receivePacket() -> Recv() failure and errno != EAGAIN");
 		if (received == 0) // peer disconnect, no idea what we do here, for now throw an exception
@@ -23,7 +26,6 @@ bool			Client::receivePacket()
 	return true;
 }
 
-// FIX!!!
 std::string		Client::getPacket()
 {
 	size_t		pos;

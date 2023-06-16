@@ -39,8 +39,6 @@ void	CommandHandler::Invoke(Client* client, std::string packet) const
 
 	try
 	{
-		// if (packet[0] == ':')
-		// 	args.popArgument();
 		raw_command = args.popArgument();
 		command = this->getCommand(raw_command);
 
