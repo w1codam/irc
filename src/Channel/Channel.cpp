@@ -22,14 +22,14 @@ Channel::~Channel()
 	}
 }
 
-void	Channel::sendMessage(std::string message)
+void	Channel::sendMessage(std::string message, Client* ignore)
 {
 	std::vector<Client*>::iterator	it;
 
 	it = this->_members.begin();
 	while (it != this->_members.end())
 	{
-		(*it)->queuePacket(message);
+		if ((*it) != ignore) (*it)->queuePacket(message);
 		++it;
 	}
 }
