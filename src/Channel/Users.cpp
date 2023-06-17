@@ -72,6 +72,9 @@ void	Channel::removeMember(Client* client)
 {
 	std::vector<Client*>::iterator	it;
 
+	if (!this->isMember(client))
+		return;
+
 	this->sendMessage(RPL_PART(client->getNickname(), std::string("#") + this->_name));
 
 	it = this->_members.begin();
