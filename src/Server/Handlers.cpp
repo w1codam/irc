@@ -61,6 +61,6 @@ void	Server::handleDisconnect(Client* client)
 		++it;
 	}
 
-	delete client;
+	this->removeClient(client->getSocket());
 }
 
