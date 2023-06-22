@@ -1,11 +1,14 @@
 #include "Client.hpp"
 
+// since the eval sheet specified we should only call recv/send only ONCE
+// even after checking errno (???????),
+// change while to if and return if \r\n is present in the buffer
 bool			Client::receivePacket()
 {
 	ssize_t	received;
-	char	buffer[1024];	// pretty sure max length for a single packet is 512 bytes but lets see (513 to set the null-byte)
+	char	buffer[1024];
 
-	while (this->_buffer.find("\r\n") == std::string::npos)
+	if (this->_buffer.find("\r\n") == std::string::npos)
 	{
 		received = Networking::Recv(this->_socket, buffer, sizeof(buffer) - 1);
 
@@ -16,35 +19,33 @@ bool			Client::receivePacket()
 		}
 		if (received == -1)
 			throw Networking::NetworkingException("receivePacket() -> Recv() failure and errno != EAGAIN");
-		if (received == 0) // peer disconnect, no idea what we do here, for now throw an exception
+		if (received == 0)
 			throw Networking::NetworkingException("receivePacket() peer disconnected");
 
 		buffer[received] = '\0';
 		this->_buffer += buffer;
 	}
 
-	return true;
+	return this->_buffer.find("\r\n") != std::string::npos;
 }
 
-// // experimental
-// // receive until errno == EAGAIN and return this->_buffer.find("\r\n") != std::string::npos
 // bool			Client::receivePacket()
 // {
 // 	ssize_t	received;
-// 	char	buffer[1024];	// pretty sure max length for a single packet is 512 bytes but lets see (513 to set the null-byte)
+// 	char	buffer[1024];
 
-// 	while (true)
+// 	while (this->_buffer.find("\r\n") == std::string::npos)
 // 	{
 // 		received = Networking::Recv(this->_socket, buffer, sizeof(buffer) - 1);
 
 // 		if (received == -1 && errno == EAGAIN)
 // 		{
 // 			errno = 0;
-// 			return this->_buffer.find("\r\n") != std::string::npos;
+// 			return false;
 // 		}
 // 		if (received == -1)
 // 			throw Networking::NetworkingException("receivePacket() -> Recv() failure and errno != EAGAIN");
-// 		if (received == 0) // peer disconnect, no idea what we do here, for now throw an exception
+// 		if (received == 0)
 // 			throw Networking::NetworkingException("receivePacket() peer disconnected");
 
 // 		buffer[received] = '\0';
@@ -53,7 +54,6 @@ bool			Client::receivePacket()
 
 // 	return true;
 // }
-
 
 std::string		Client::getPacket()
 {
